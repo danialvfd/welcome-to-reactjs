@@ -1,0 +1,32 @@
+my-react-app/
+│
+├── public/
+│   ├── index.html
+│   └── favicon.ico
+│
+├── src/
+│   ├── components/
+│   │   ├── Header.js
+│   │   ├── Footer.js
+│   │   └── Button.js
+│   ├── pages/
+│   │   ├── Home.js
+│   │   └── About.js
+│   ├── api/
+│   │   └── fetchUsers.js
+│   ├── utils/
+│   │   └── formatData.js
+│   ├── assets/
+│   │   ├── images/
+│   │   │   └── logo.png
+│   │   └── styles.css
+│   ├── context/
+│   │   └── UserContext.js
+│   ├── hooks/
+│   │   └── useFetch.js
+│   ├── App.js
+│   ├── index.js
+│   └── routes.js
+│
+├── package.json
+└── README.md

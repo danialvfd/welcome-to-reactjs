@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const FunctionalComponent = () => {
+const FunctionalComponent = ({ name }) => {
+    const [count, setCount] = useState(0);
+
     useEffect(() => {
         console.log('FunctionalComponent: Component did mount');
 
@@ -13,11 +15,17 @@ const FunctionalComponent = () => {
         console.log('FunctionalComponent: Component did update');
     });
 
+    const handleClick = () => {
+        setCount(count + 1);
+    };
+
     console.log('FunctionalComponent: Render method called');
 
     return (
         <div>
             <h1>Functional Component</h1>
+            <p>Count: {count}</p>
+            <button onClick={handleClick}>Increment</button>
         </div>
     );
 };
