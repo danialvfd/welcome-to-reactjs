@@ -24,6 +24,7 @@ const FunctionalComponent = ({ name }) => {
     return (
         <div>
             <h1>Functional Component</h1>
+            <p>Welcome, {name}</p>
             <p>Count: {count}</p>
             <button onClick={handleClick}>Increment</button>
         </div>

@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import ClassComponent from './components/ClassComponent';
-import FunctionalComponent from './components/FunctionalComponent';
+import ClassComponent from './components/Class';
+import FunctionalComponent from './components/Functional';
+import UserInfo from './components/UserInfo';
 
 const App = () => {
+    const [userData, setUserData] = useState(null);
+
+    const handleClick = () => {
+        const data = {
+            name: 'Ali',
+            family: 'Mohammadi',
+            age: 25,
+        };
+        setUserData(data); // ارسال داده‌ها به state
+    };
+
     return (
         <Router>
             <div>
@@ -17,6 +29,10 @@ const App = () => {
                         </li>
                     </ul>
                 </nav>
+                <div>
+                    <button onClick={handleClick}>ارسال اطلاعات</button>
+                    {userData && <UserInfo {...userData} />}
+                </div>
 
                 <Routes>
                     <Route path="/page1" element={<FunctionalComponent />} />
