@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import ClassComponent from './components/Class';
-import FunctionalComponent from './components/Functional';
-import UserInfo from './components/UserInfo';
+import ClassComponent from './pages/Class';
+import FunctionalComponent from './pages/Functional';
+import UserInfo from './pages/UserInfo';
 
 const App = () => {
     const [userData, setUserData] = useState(null);
@@ -13,7 +13,7 @@ const App = () => {
             family: 'Mohammadi',
             age: 25,
         };
-        setUserData(data); // ارسال داده‌ها به state
+        setUserData(data);
     };
 
     return (
