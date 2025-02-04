@@ -3,9 +3,9 @@ import React from 'react';
 const UserInfo = ({ name, family, age }) => {
   return (
     <div>
-      <p>نام: {name}</p>
-      <p>نام خانوادگی: {family}</p>
-      <p>سن: {age}</p>
+      <p>Name: {name}</p>
+      <p>Last Name: {family}</p>
+      <p>Age: {age}</p>
     </div>
   );
 };
