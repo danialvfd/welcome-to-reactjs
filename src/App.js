@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import ClassComponent from './pages/Class';
-import FunctionalComponent from './pages/Functional';
+import Class from './pages/Class';
+import Functional from './pages/Functional';
 import UserInfo from './pages/UserInfo';
 import TestApi from './pages/testApi';
 
@@ -39,8 +39,8 @@ const App = () => {
                 </div>
 
                 <Routes>
-                    <Route path="/page1" element={<FunctionalComponent />} />
-                    <Route path="/page2" element={<ClassComponent />} />
+                    <Route path="/page1" element={<Functional />} />
+                    <Route path="/page2" element={<Class />} />
                     <Route path="/page3" element={<TestApi />} />
                 </Routes>
             </div>
