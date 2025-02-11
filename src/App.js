@@ -13,6 +13,8 @@ import UseRef from './pages/TestUseref';
 import PageA from './pages/PageA';
 import PageB from './pages/PageB';
 import PageC from './pages/PageC';
+import UseCallback from './pages/useCallback';
+import CustomHook from './pages/testCustomHook';
 
 const App = () => {
   const [userData, setUserData] = useState(null);
@@ -48,6 +50,9 @@ const App = () => {
             <Route path="/pageB" element={<PageB />} />
             <Route path="/pageC" element={<PageC />} />
             <Route path="/page5" element={<UseRef />} />
+            <Route path="/page6" element={<UseCallback />} />
+            <Route path="/page7" element={<CustomHook />} />
+
           </Routes>
         </Layout>
       </Router>

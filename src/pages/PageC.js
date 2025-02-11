@@ -3,6 +3,7 @@ import { StateContext } from './StateContext';
 
 const PageC = () => {
   const { state } = useContext(StateContext);
+  
   const sum = state.valueA + state.valueB;
 
   return (

@@ -13,6 +13,9 @@ const Layout = ({ children }) => {
           <li><Link to="/pageB">Page B</Link></li>
           <li><Link to="/pageC">Page C</Link></li>
           <li><Link to="/page5">UseRef</Link></li>
+          <li><Link to="/page6">UseCallback</Link></li>
+          <li><Link to="/page7">CustomHook</Link></li>
+
         </ul>
       </nav>
       <div className="content">
