@@ -1,7 +1,7 @@
-import React, { useState, useReducer } from 'react';
+import React, { useEffect, useReducer, useContext, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { StateContext, initialState, reducer } from './pages/StateContext';
-import { UserProvider } from './components/UserContext';
+import { UserProvider, UserContext } from './components/UserContext';
 import Layout from './layout/BaseLayout';
 import Class from './pages/Class';
 import Functional from './pages/Functional';
@@ -17,48 +17,57 @@ import UseCallback from './pages/useCallback';
 import CustomHook from './pages/testCustomHook';
 
 const App = () => {
-    const [userData, setUserData] = useState(null);
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const handleClick = () => {
-        setUserData({
-            name: 'Ali',
-            family: 'Mohammadi',
-            age: 25,
-        });
-    };
-    // useEffect(() => {
-    //     console.log('FunctionalComponent: Component did update');
-    // });
     return (
         <StateContext.Provider value={{ state, dispatch }}>
-            <Router>
-                <Layout>
-                    <div>
-                        <button onClick={handleClick}>ارسال اطلاعات</button>
-                        {userData && <UserInfo {...userData} />}
-                    </div>
-
-                    <UserProvider value={{ userData, setUserData }}>
-                        <Profile />
-                    </UserProvider >
-
-                    <Routes>
-                        <Route path="/page1" element={<Functional />} />
-                        <Route path="/page2" element={<Class />} />
-                        <Route path="/page3" element={<TestApi />} />
-                        <Route path="/page4" element={<TestAjax />} />
-                        <Route path="/pageA" element={<PageA />} />
-                        <Route path="/pageB" element={<PageB />} />
-                        <Route path="/pageC" element={<PageC />} />
-                        <Route path="/page5" element={<UseRef />} />
-                        <Route path="/page6" element={<UseCallback />} />
-                        <Route path="/page7" element={<CustomHook />} />
-
-                    </Routes>
-                </Layout>
-            </Router>
+            <UserProvider>
+                <MainContent />
+            </UserProvider>
         </StateContext.Provider>
+    );
+};
+
+const MainContent = () => {
+    const { user, setUser } = useContext(UserContext);
+    const [userData, setUserData] = useState();
+    const [showUserInfo, setShowUserInfo] = useState(false); 
+
+    useEffect(() => {
+        setUser({ name: 'ali' });
+    }, [setUser]);
+
+    const handleClick = () => {
+        setUser({ name: 'mohammad' });
+        setUserData({ name: 'kazemi', family: 'ali', age: 30 });
+        setShowUserInfo(true);
+    };
+
+    return (
+        <Router>
+            <Layout>
+                <div>
+                    <button onClick={handleClick}>دریافت اطلاعات</button>
+                    <div>
+                        <h3>UserName: {user.name}</h3>
+                    </div>
+                    {showUserInfo && <UserInfo name={user.name} family={userData.family} age={userData.age} />}
+                    <Profile />
+                </div>
+                <Routes>
+                    <Route path="/page1" element={<Functional />} />
+                    <Route path="/page2" element={<Class />} />
+                    <Route path="/page3" element={<TestApi />} />
+                    <Route path="/page4" element={<TestAjax />} />
+                    <Route path="/pageA" element={<PageA />} />
+                    <Route path="/pageB" element={<PageB />} />
+                    <Route path="/pageC" element={<PageC />} />
+                    <Route path="/page5" element={<UseRef />} />
+                    <Route path="/page6" element={<UseCallback />} />
+                    <Route path="/page7" element={<CustomHook />} />
+                </Routes>
+            </Layout>
+        </Router>
     );
 };
 
