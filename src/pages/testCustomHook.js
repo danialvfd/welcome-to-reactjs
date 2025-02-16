@@ -1,7 +1,7 @@
 import React from 'react';
 import useCounter from '../components/useCounter';
 
-function App() {
+function testCustomHook() {
   const { count, increment, decrement, reset } = useCounter(0);
 
   return (
@@ -14,4 +14,4 @@ function App() {
   );
 }
 
-export default App;
+export default testCustomHook;

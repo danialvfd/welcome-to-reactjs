@@ -39,7 +39,7 @@ const MainContent = () => {
 
     const handleClick = () => {
         setUser({ name: 'mohammad' });
-        setUserData({ name: 'kazemi', family: 'ali', age: 30 });
+        setUserData({ name: 'ali', family: 'kazemi', age: 30 });
         setShowUserInfo(true);
     };
 
@@ -51,7 +51,7 @@ const MainContent = () => {
                     <div>
                         <h3>UserName: {user.name}</h3>
                     </div>
-                    {showUserInfo && <UserInfo name={user.name} family={userData.family} age={userData.age} />}
+                    {showUserInfo && <UserInfo name={userData.name} family={userData.family} age={userData.age} />}
                     <Profile />
                 </div>
                 <Routes>
