@@ -1,0 +1,59 @@
+.main-container {
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.box-container {
+  text-align: center;
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+h1, h2 {
+  font-size: 20px;
+  color: #7e0303;
+  margin-bottom: 15px;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.input-group input,
+.input-group select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #485766;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.final-amount {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: green;
+}

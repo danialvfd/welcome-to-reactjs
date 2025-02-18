@@ -6,19 +6,24 @@ import Layout from './layout/BaseLayout';
 import Class from './pages/Class';
 import Functional from './pages/Functional';
 import UserInfo from './pages/UserInfo';
-import TestApi from './pages/testApi';
-import TestAjax from './pages/testAjax';
+import TestApi from './pages/TestApi';
+import TestAjax from './pages/TestAjax';
 import Profile from './components/Profile';
 import UseRef from './pages/TestUseref';
 import PageA from './pages/PageA';
 import PageB from './pages/PageB';
 import PageC from './pages/PageC';
-import UseCallback from './pages/useCallback';
-import CustomHook from './pages/testCustomHook';
+import UseCallback from './pages/UseCallback';
+import CustomHook from './pages/TestCustomHook';
+import AmountDivider from './components/AmountDivider';
+import DiscountCalculator from './components/DiscountCalculator';
+import ShareCalculator from './components/ShareCalculator';
+import './assets/myStyles.css';
+
 
 const App = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
-  
+
     return (
         <StateContext.Provider value={{ state, dispatch }}>
             <UserProvider>
@@ -31,7 +36,7 @@ const App = () => {
 const MainContent = () => {
     const { user, setUser } = useContext(UserContext);
     const [userData, setUserData] = useState();
-    const [showUserInfo, setShowUserInfo] = useState(false); 
+    const [showUserInfo, setShowUserInfo] = useState(false);
 
     useEffect(() => {
         setUser({ name: 'ali' });
@@ -46,6 +51,15 @@ const MainContent = () => {
     return (
         <Router>
             <Layout>
+                <div className="container">
+                    <div className="sidebar">
+                        <AmountDivider />
+                        <DiscountCalculator />
+                    </div>
+                    <div className="main-content">
+                        <ShareCalculator />
+                    </div>
+                </div>
                 <div>
                     <button onClick={handleClick}>دریافت اطلاعات</button>
                     <div>

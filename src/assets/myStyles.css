@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    background-color: #d9dbc8;
+    flex-direction: row-reverse;
+  }
+  
+  .sidebar {
+    width: 25%;
+    background-color: rgb(160, 139, 139);
+    padding: 20px;
+  }
+  
+  .main-content {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
