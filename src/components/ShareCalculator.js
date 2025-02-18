@@ -30,14 +30,14 @@ const ShareCalculator = () => {
 
     if (discountType === "percent") {
       discountAmount = (amount * (discountAmount / 100));
-  }
+    }
 
-  if (discountType === "amount") {
+    if (discountType === "amount") {
       discountAmount = parseFloat(discount) || 0;
-  }
+    }
 
     let finalPrice = (amount - discountAmount) + deliveryCost + (amount * (taxValue / 100));
-    const finalAmountValue = finalPrice.toFixed(2); 
+    const finalAmountValue = finalPrice.toFixed(2);
 
     setFinalAmount(finalAmountValue);
 

@@ -15,10 +15,8 @@ import PageB from './pages/PageB';
 import PageC from './pages/PageC';
 import UseCallback from './pages/UseCallback';
 import CustomHook from './pages/TestCustomHook';
-import AmountDivider from './components/AmountDivider';
-import DiscountCalculator from './components/DiscountCalculator';
-import ShareCalculator from './components/ShareCalculator';
 import './assets/myStyles.css';
+import DongChi from './pages/DongChi';
 
 
 const App = () => {
@@ -51,15 +49,6 @@ const MainContent = () => {
     return (
         <Router>
             <Layout>
-                <div className="container">
-                    <div className="sidebar">
-                        <AmountDivider />
-                        <DiscountCalculator />
-                    </div>
-                    <div className="main-content">
-                        <ShareCalculator />
-                    </div>
-                </div>
                 <div>
                     <button onClick={handleClick}>دریافت اطلاعات</button>
                     <div>
@@ -69,6 +58,7 @@ const MainContent = () => {
                     <Profile />
                 </div>
                 <Routes>
+                    <Route path="/DongChi" element={<DongChi />} />
                     <Route path="/page1" element={<Functional />} />
                     <Route path="/page2" element={<Class />} />
                     <Route path="/page3" element={<TestApi />} />

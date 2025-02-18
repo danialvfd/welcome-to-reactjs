@@ -6,6 +6,7 @@ const Layout = ({ children }) => {
     <div>
       <nav className="navbar">
         <ul>
+          <li><Link to="/DongChi">دنگ‌چی</Link></li>
           <li><Link to="/page1">FunctionalBase</Link></li>
           <li><Link to="/page3">TestApi</Link></li>
           <li><Link to="/page4">TestAjax</Link></li>
