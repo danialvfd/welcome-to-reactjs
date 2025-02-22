@@ -2,15 +2,15 @@ import { useState } from "react";
 import "../assets/CalculatorStyles.css";
 
 const AmountDivider = () => {
-  const [totalAmount, setTotalAmount] = useState("");
-  const [personNumber, setPersonNum] = useState("");
-  const [amountPerPerson, setAmountPerPerson] = useState(null);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [personNumber, setPersonNum] = useState(0);
+  const [amountPerPerson, setAmountPerPerson] = useState(0);
 
   const handleCalculate = () => {
     if (totalAmount && personNumber && personNumber > 0) {
       setAmountPerPerson((totalAmount / personNumber).toFixed(2));
     } else {
-      setAmountPerPerson("null");
+      setAmountPerPerson(0);
     }
   };
   return (
@@ -39,7 +39,7 @@ const AmountDivider = () => {
 
       {amountPerPerson !== null && (
         <p className="final-amount">
-          Result = totalAmount / personNumber = {amountPerPerson} toman
+          Result = {totalAmount} / {personNumber} = {amountPerPerson} toman
         </p>
       )}
     </div>
