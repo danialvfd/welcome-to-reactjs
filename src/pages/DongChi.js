@@ -1,24 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../layout/MainLayout';
 import AmountDivider from '../components/AmountDivider';
 import DiscountCalculator from '../components/DiscountCalculator';
 import ShareCalculator from '../components/ShareCalculator';
+import CalculationHistory from '../components/CalculationHistory';
 
 function DongChi() {
-    const sidebarContent = (
+  const [history, setHistory] = useState([]);
+
+  useEffect(() => {
+    const savedHistory = JSON.parse(localStorage.getItem("calculationHistory")) || [];
+    setHistory(savedHistory);
+  }, []);
+
+  const updateHistory = (updatedHistory) => {
+    setHistory(updatedHistory);
+    localStorage.setItem("calculationHistory", JSON.stringify(updatedHistory));
+  };
+
+  return (
+    <Layout 
+      sidebar={
         <>
-            <AmountDivider />
-            <DiscountCalculator />
+          <AmountDivider />
+          <DiscountCalculator />
         </>
-    );
-
-    const mainContent = (
-        <ShareCalculator />
-    );
-
-    return (
-        <Layout sidebar={sidebarContent} content={mainContent} />
-    );
+      } 
+      content={
+        <>
+          <ShareCalculator updateHistory={updateHistory} />
+          <CalculationHistory history={history} updateHistory={updateHistory} />
+        </>
+      } 
+    />
+  );
 }
 
 export default DongChi;

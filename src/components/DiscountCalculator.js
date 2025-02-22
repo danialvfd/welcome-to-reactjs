@@ -8,7 +8,7 @@ const DiscountCalculator = () => {
 
   const handleCalculate = () => {
     if (totalAmount && discount && discount > 0) {
-      setDiscountPercent((discount * 100 / totalAmount).toFixed(2));
+      setDiscountPercent((discount * 100 / totalAmount).toFixed(1));
     } else {
       setDiscountPercent("null");
     }
@@ -17,23 +17,27 @@ const DiscountCalculator = () => {
     <div className="box-container">
       <h2>Discount Calculator</h2>
       <div className="input-group">
-        <input
-          type="number"
-          placeholder="مبلغ کل"
-          value={totalAmount}
-          onChange={(e) => setTotalAmount(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="تخفیف"
-          value={discount}
-          onChange={(e) => setDiscount(e.target.value)}
-        />
+        <div>
+          <label>مبلغ کل</label>
+          <input
+            type="number"
+            placeholder="totalAmount"
+            value={totalAmount}
+            onChange={(e) => setTotalAmount(e.target.value)} />
+        </div>
+        <div>
+          <label>تخفیف</label>
+          <input
+            type="number"
+            placeholder="discount"
+            value={discount}
+            onChange={(e) => setDiscount(e.target.value)} />
+        </div>
       </div>
       <button onClick={handleCalculate}>محاسبه</button>
 
       {discountPercent !== null && (
-        <p className="final-amount">درصد میزان تخفیف: %{discountPercent}</p>
+        <p className="final-amount">Result = discount * 100 / totalAmount  = {discountPercent}%</p>
       )}
     </div>
   );

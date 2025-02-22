@@ -10,16 +10,15 @@
 .box-container {
   text-align: center;
   background-color: white;
-  padding: 15px;
-  border-radius: 8px;
-  width: 300px;
-  margin-bottom: 20px;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 h1, h2 {
-  font-size: 20px;
+  font-size: 1.4rem;
   color: #7e0303;
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 }
 
 .input-group {
@@ -35,6 +34,7 @@ h1, h2 {
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 100px;
+  margin-top: 0.5rem;
 }
 
 button {
@@ -53,7 +53,87 @@ button:hover {
 
 .final-amount {
   margin-top: 15px;
-  font-size: 18px;
+  font-size: 0.8rem;
   font-weight: bold;
-  color: green;
+  color: rgb(1, 60, 1);
+}
+
+label {
+  color: #000264;
+}
+
+.history-container {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #f9f9f9;
+  margin-top: 20px;
+}
+
+.history-item {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 15px;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.history-item:hover {
+  background-color: #f1f1f1;
+}
+
+.history-actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.history-actions button {
+  background-color: #040968;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.history-actions button:hover {
+  background-color: #0056b3;
+}
+
+.history-item strong {
+  color: #333;
+  font-size: 16px;
+}
+
+.history-item div {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Drag handle */
+.drag-handle {
+  cursor: grab;
+  padding: 8px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.history-item:active .drag-handle {
+  cursor: grabbing;
+}
+
+ul {
+  padding-left: 0;
 }

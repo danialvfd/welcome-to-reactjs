@@ -17,24 +17,29 @@ const AmountDivider = () => {
     <div className="box-container">
       <h2>Amount Divider</h2>
       <div className="input-group">
-        <input
-          type="number"
-          placeholder="مبلغ کل"
-          value={totalAmount}
-          onChange={(e) => setTotalAmount(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="تعداد نفرات"
-          value={personNumber}
-          onChange={(e) => setPersonNum(e.target.value)}
-        />
+        <div>
+          <label>مبلغ کل</label>
+          <input
+            type="number"
+            placeholder="totalAmount"
+            value={totalAmount}
+            onChange={(e) => setTotalAmount(e.target.value)} />
+        </div>
+        <div>
+          <label>تعداد نفرات</label>
+          <input
+            type="number"
+            placeholder="personNum"
+            value={personNumber}
+            onChange={(e) => setPersonNum(e.target.value)}
+          />
+        </div>
       </div>
       <button onClick={handleCalculate}>محاسبه</button>
 
       {amountPerPerson !== null && (
         <p className="final-amount">
-          مبلغ پرداختی هر نفر: {amountPerPerson} تومان
+          Result = totalAmount / personNumber = {amountPerPerson} toman
         </p>
       )}
     </div>

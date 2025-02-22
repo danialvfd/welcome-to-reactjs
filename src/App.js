@@ -1,23 +1,21 @@
-import React, { useEffect, useReducer, useContext, useState } from 'react';
+import React, { useReducer } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { StateContext, initialState, reducer } from './pages/StateContext';
-import { UserProvider, UserContext } from './components/UserContext';
+import { UserProvider } from './components/UserContext';
 import Layout from './layout/BaseLayout';
 import Class from './pages/Class';
 import Functional from './pages/Functional';
-import UserInfo from './pages/UserInfo';
 import TestApi from './pages/TestApi';
 import TestAjax from './pages/TestAjax';
-import Profile from './components/Profile';
 import UseRef from './pages/TestUseref';
 import PageA from './pages/PageA';
 import PageB from './pages/PageB';
 import PageC from './pages/PageC';
 import UseCallback from './pages/UseCallback';
 import CustomHook from './pages/TestCustomHook';
-import './assets/myStyles.css';
 import DongChi from './pages/DongChi';
-
+import UserDetails from './pages/UserDetails'; 
+import './assets/myStyles.css';
 
 const App = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -25,53 +23,26 @@ const App = () => {
     return (
         <StateContext.Provider value={{ state, dispatch }}>
             <UserProvider>
-                <MainContent />
+                <Router>
+                    <Layout>
+                        <Routes>
+                            <Route path="/DongChi" element={<DongChi />} />
+                            <Route path="/page1" element={<Functional />} />
+                            <Route path="/page2" element={<Class />} />
+                            <Route path="/page3" element={<TestApi />} />
+                            <Route path="/page4" element={<TestAjax />} />
+                            <Route path="/pageA" element={<PageA />} />
+                            <Route path="/pageB" element={<PageB />} />
+                            <Route path="/pageC" element={<PageC />} />
+                            <Route path="/page5" element={<UseRef />} />
+                            <Route path="/page6" element={<UseCallback />} />
+                            <Route path="/page7" element={<CustomHook />} />
+                            <Route path="/user-details" element={<UserDetails />} />
+                        </Routes>
+                    </Layout>
+                </Router>
             </UserProvider>
         </StateContext.Provider>
-    );
-};
-
-const MainContent = () => {
-    const { user, setUser } = useContext(UserContext);
-    const [userData, setUserData] = useState();
-    const [showUserInfo, setShowUserInfo] = useState(false);
-
-    useEffect(() => {
-        setUser({ name: 'ali' });
-    }, [setUser]);
-
-    const handleClick = () => {
-        setUser({ name: 'mohammad' });
-        setUserData({ name: 'ali', family: 'kazemi', age: 30 });
-        setShowUserInfo(true);
-    };
-
-    return (
-        <Router>
-            <Layout>
-                <div>
-                    <button onClick={handleClick}>دریافت اطلاعات</button>
-                    <div>
-                        <h3>UserName: {user.name}</h3>
-                    </div>
-                    {showUserInfo && <UserInfo name={userData.name} family={userData.family} age={userData.age} />}
-                    <Profile />
-                </div>
-                <Routes>
-                    <Route path="/DongChi" element={<DongChi />} />
-                    <Route path="/page1" element={<Functional />} />
-                    <Route path="/page2" element={<Class />} />
-                    <Route path="/page3" element={<TestApi />} />
-                    <Route path="/page4" element={<TestAjax />} />
-                    <Route path="/pageA" element={<PageA />} />
-                    <Route path="/pageB" element={<PageB />} />
-                    <Route path="/pageC" element={<PageC />} />
-                    <Route path="/page5" element={<UseRef />} />
-                    <Route path="/page6" element={<UseCallback />} />
-                    <Route path="/page7" element={<CustomHook />} />
-                </Routes>
-            </Layout>
-        </Router>
     );
 };
 
