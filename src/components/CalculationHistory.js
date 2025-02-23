@@ -1,15 +1,11 @@
 import React from "react";
 import "../assets/CalculatorStyles.css";
 
-const CalculationHistory = ({ history, updateHistory }) => {
-  const handleDelete = (id) => {
-    const updatedHistory = history.filter((item) => item.id !== id);
+const CalculationHistory = ({ history, updateHistory, handleEdit }) => {
+  const handleDelete = (index) => {
+    const updatedHistory = history.filter((_, i) => i !== index);
     updateHistory(updatedHistory);
     localStorage.setItem("calculationHistory", JSON.stringify(updatedHistory));
-  };
-
-  const handleEdit = (item) => {
-    updateHistory(item);
   };
 
   return (
@@ -17,11 +13,12 @@ const CalculationHistory = ({ history, updateHistory }) => {
       <h2>History</h2>
       <ul className="history-container">
         {history.map((item, index) => (
-          <li key={item.id} className="history-item">
+          <li key={index} className="history-item">
             <div className="history-actions">
-              <strong>{index}- {item.resultContent}</strong>
+              <strong>{index + 1}- {item.resultContent}</strong>
+              <button>Drag</button>
               <button onClick={() => handleEdit(item)}>Edit</button>
-              <button onClick={() => handleDelete(item.id)}>Remove</button>
+              <button onClick={() => handleDelete(index)}>Remove</button>
             </div>
           </li>
         ))}

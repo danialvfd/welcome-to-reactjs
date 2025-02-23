@@ -2,9 +2,9 @@ import { useState } from "react";
 import "../assets/CalculatorStyles.css";
 
 const AmountDivider = () => {
-  const [totalAmount, setTotalAmount] = useState(0);
-  const [personNumber, setPersonNum] = useState(0);
-  const [amountPerPerson, setAmountPerPerson] = useState(0);
+  const [totalAmount, setTotalAmount] = useState("");
+  const [personNumber, setPersonNum] = useState("");
+  const [amountPerPerson, setAmountPerPerson] = useState(null);
 
   const handleCalculate = () => {
     if (totalAmount && personNumber && personNumber > 0) {

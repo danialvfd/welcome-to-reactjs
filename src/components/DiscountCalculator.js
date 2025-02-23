@@ -37,7 +37,7 @@ const DiscountCalculator = () => {
       <button onClick={handleCalculate}>محاسبه</button>
 
       {discountPercent !== null && (
-        <p className="final-amount">Result = discount * 100 / totalAmount  = {discountPercent}%</p>
+        <p className="final-amount">Result = {discount} * 100 / {totalAmount}  = {discountPercent}%</p>
       )}
     </div>
   );

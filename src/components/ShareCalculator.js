@@ -1,34 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../assets/CalculatorStyles.css";
 
-const ShareCalculator = ({ updateHistory }) => {
+const ShareCalculator = ({ updateHistory, selectedItem }) => {
   const [totalAmount, setTotalAmount] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [discountType, setDiscountType] = useState("percent");
   const [delivery, setDelivery] = useState(0);
   const [tax, setTax] = useState(0);
-  const [finalAmount, setFinalAmount] = useState(0);
+  const [finalAmount, setFinalAmount] = useState(null);
   const [discountAmount, setDiscountAmount] = useState(0);
-  const [resultContent, setResultContent] = useState("");
+  const [resultContent, setResultContent] = useState();
+
+  useEffect(() => {
+    if (selectedItem) {
+      setTotalAmount(selectedItem.totalAmount);
+      setDiscount(selectedItem.discount);
+      setDiscountType(selectedItem.discountType);
+      setDelivery(selectedItem.delivery);
+      setTax(selectedItem.tax);
+      setFinalAmount(selectedItem.finalAmount);
+    }
+  }, [selectedItem]);
 
   const handleCalculate = () => {
     let amount = parseFloat(totalAmount) || 0;
     let deliveryCost = parseFloat(delivery) || 0;
     let taxValue = parseFloat(tax) || 0;
+    let calculatedDiscount = parseFloat(discountAmount) || 0;
 
     if (discountType === "percent") {
-      setDiscountAmount(amount * (discountAmount / 100));
+      calculatedDiscount = amount * (parseFloat(discount) / 100);
+    } else if (discountType === "amount") {
+      calculatedDiscount = parseFloat(discount) || 0;
     }
+    setDiscountAmount(calculatedDiscount);
 
-    if (discountType === "amount") {
-      setDiscountAmount(parseFloat(discount) || 0);
-    }
-
-    let finalPrice = (amount - discountAmount) + deliveryCost + (amount * (taxValue / 100));
+    let finalPrice = (amount - calculatedDiscount) + deliveryCost + (amount * (taxValue / 100));
     const finalAmountValue = finalPrice.toFixed(2);
-
     setFinalAmount(finalAmountValue);
-    setResultContent(`${totalAmount} - ${discountAmount} + ${delivery} + (${totalAmount} * ${tax} / 100) = ${finalAmount}`);
+
+    setResultContent(`${amount} - ${calculatedDiscount.toFixed(2)} + ${deliveryCost} + (${amount} * ${taxValue} / 100) = ${finalAmountValue}`);
 
     const newHistoryItem = {
       totalAmount,
@@ -37,22 +48,20 @@ const ShareCalculator = ({ updateHistory }) => {
       delivery,
       tax,
       finalAmount: finalAmountValue,
-      resultContent
+      resultContent: `${amount} - ${calculatedDiscount.toFixed(2)} + ${deliveryCost} + (${amount} * ${taxValue} / 100) =${finalAmountValue}`
     };
 
     const savedHistory = JSON.parse(localStorage.getItem("calculationHistory")) || [];
     const updatedHistory = [newHistoryItem, ...savedHistory];
     
     localStorage.setItem("calculationHistory", JSON.stringify(updatedHistory));
-
     updateHistory(updatedHistory);
-
+    updateHistory(updatedHistory);
     setTotalAmount(0);
     setDiscount(0);
     setDiscountType("percent");
     setDelivery(0);
     setTax(0);
-    setDiscountAmount(0);
   };
 
   return (
@@ -80,7 +89,7 @@ const ShareCalculator = ({ updateHistory }) => {
           <select
             value={discountType}
             onChange={(e) => setDiscountType(e.target.value)}>
-            <option value="percentage">درصدی</option>
+            <option value="percent">درصدی</option>
             <option value="amount">مبلغ ثابت</option>
           </select>
         </div>

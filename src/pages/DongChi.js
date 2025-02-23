@@ -7,6 +7,7 @@ import CalculationHistory from '../components/CalculationHistory';
 
 function DongChi() {
   const [history, setHistory] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
     const savedHistory = JSON.parse(localStorage.getItem("calculationHistory")) || [];
@@ -16,6 +17,10 @@ function DongChi() {
   const updateHistory = (updatedHistory) => {
     setHistory(updatedHistory);
     localStorage.setItem("calculationHistory", JSON.stringify(updatedHistory));
+  };
+
+  const handleEdit = (item) => {
+    setSelectedItem(item);
   };
 
   return (
@@ -28,8 +33,15 @@ function DongChi() {
       } 
       content={
         <>
-          <ShareCalculator updateHistory={updateHistory} />
-          <CalculationHistory history={history} updateHistory={updateHistory} />
+          <ShareCalculator 
+            updateHistory={updateHistory}
+            selectedItem={selectedItem}
+          />
+          <CalculationHistory 
+            history={history} 
+            updateHistory={updateHistory}
+            handleEdit={handleEdit}
+          />
         </>
       } 
     />
