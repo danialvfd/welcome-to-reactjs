@@ -1,11 +1,14 @@
 import React from "react";
 import "../assets/CalculatorStyles.css";
 
-const CalculationHistory = ({ history, updateHistory, handleEdit }) => {
+const CalculationHistory = ({ history, updateHistory }) => {
   const handleDelete = (index) => {
     const updatedHistory = history.filter((_, i) => i !== index);
     updateHistory(updatedHistory);
     localStorage.setItem("calculationHistory", JSON.stringify(updatedHistory));
+  };
+  const handleEdit = (item) => {
+    // call context to update selectedItem
   };
 
   return (

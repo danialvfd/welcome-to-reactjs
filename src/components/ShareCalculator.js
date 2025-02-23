@@ -41,21 +41,26 @@ const ShareCalculator = ({ updateHistory, selectedItem }) => {
 
     setResultContent(`${amount} - ${calculatedDiscount.toFixed(2)} + ${deliveryCost} + (${amount} * ${taxValue} / 100) = ${finalAmountValue}`);
 
+    // todo if selectedItem is not null then call hook remove(selectedItem.id) 
+
     const newHistoryItem = {
+      //id: 0, todo
       totalAmount,
       discount,
       discountType,
       delivery,
       tax,
       finalAmount: finalAmountValue,
-      resultContent: `${amount} - ${calculatedDiscount.toFixed(2)} + ${deliveryCost} + (${amount} * ${taxValue} / 100) =${finalAmountValue}`
+      resultContent: resultContent
     };
 
     const savedHistory = JSON.parse(localStorage.getItem("calculationHistory")) || [];
+    // todo update submitted ids in savedHistory. add each item + 1.
     const updatedHistory = [newHistoryItem, ...savedHistory];
     
     localStorage.setItem("calculationHistory", JSON.stringify(updatedHistory));
-    updateHistory(updatedHistory);
+
+
     updateHistory(updatedHistory);
     setTotalAmount(0);
     setDiscount(0);

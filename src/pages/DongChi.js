@@ -19,10 +19,6 @@ function DongChi() {
     localStorage.setItem("calculationHistory", JSON.stringify(updatedHistory));
   };
 
-  const handleEdit = (item) => {
-    setSelectedItem(item);
-  };
-
   return (
     <Layout 
       sidebar={
@@ -40,7 +36,6 @@ function DongChi() {
           <CalculationHistory 
             history={history} 
             updateHistory={updateHistory}
-            handleEdit={handleEdit}
           />
         </>
       } 
