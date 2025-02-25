@@ -13,8 +13,7 @@ const SelectedItemProvider = ({ children }) => {
 };
 
 const useSelectedItem = () => {
-  const context = useContext(SelectedItemContext);
-  return context;
+  return useContext(SelectedItemContext);
 };
 
 export { SelectedItemProvider, useSelectedItem };

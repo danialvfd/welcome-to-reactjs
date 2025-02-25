@@ -34,6 +34,9 @@ const ShareCalculator = ({ updateHistory, selectedItem }) => {
       calculatedDiscount = parseFloat(discount) || 0;
     }
 
+    // todo if percent : input value < 0 or > 100 then show error message tand cancel proggress 
+    // todo if amnt: input value < 0 then show error message and cancel proggress 
+
     let finalPrice = (amount - calculatedDiscount) + deliveryCost + (amount * (taxValue / 100));
     const finalAmountValue = finalPrice.toFixed(2);
     const newResultContent = `${amount} - ${calculatedDiscount.toFixed(2)} + ${deliveryCost} + (${amount} * ${taxValue} / 100) = ${finalAmountValue}`;
@@ -55,8 +58,8 @@ const ShareCalculator = ({ updateHistory, selectedItem }) => {
     let updatedHistory;
 
     if (selectedItem) {
-      updatedHistory = savedHistory.filter(item => item.id !== selectedItem.id); 
-      updatedHistory = [newHistoryItem, ...updatedHistory]; 
+      updatedHistory = savedHistory.filter(item => item.id !== selectedItem.id);
+      updatedHistory = [newHistoryItem, ...updatedHistory];
     } else {
       updatedHistory = [newHistoryItem, ...savedHistory];
     }
