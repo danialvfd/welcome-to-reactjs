@@ -4,10 +4,11 @@ import AmountDivider from '../components/AmountDivider';
 import DiscountCalculator from '../components/DiscountCalculator';
 import ShareCalculator from '../components/ShareCalculator';
 import CalculationHistory from '../components/CalculationHistory';
+import { useSelectedItem } from '../context/SelectedItemContext'; 
 
 function DongChi() {
   const [history, setHistory] = useState([]);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const { selectedItem, setSelectedItem } = useSelectedItem();
 
   useEffect(() => {
     const savedHistory = JSON.parse(localStorage.getItem("calculationHistory")) || [];
@@ -31,7 +32,8 @@ function DongChi() {
         <>
           <ShareCalculator 
             updateHistory={updateHistory}
-            selectedItem={selectedItem}
+            selectedItem={selectedItem} 
+            setSelectedItem={setSelectedItem} 
           />
           <CalculationHistory 
             history={history} 

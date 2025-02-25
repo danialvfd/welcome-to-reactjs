@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-import "../assets/CalculatorStyles.css";
+import { useSelectedItem } from "../context/SelectedItemContext";
 
 const ShareCalculator = ({ updateHistory, selectedItem }) => {
+  const { setSelectedItem } = useSelectedItem();
   const [totalAmount, setTotalAmount] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [discountType, setDiscountType] = useState("percent");
   const [delivery, setDelivery] = useState(0);
   const [tax, setTax] = useState(0);
   const [finalAmount, setFinalAmount] = useState(null);
-  const [discountAmount, setDiscountAmount] = useState(0);
   const [resultContent, setResultContent] = useState();
 
   useEffect(() => {
@@ -26,42 +26,46 @@ const ShareCalculator = ({ updateHistory, selectedItem }) => {
     let amount = parseFloat(totalAmount) || 0;
     let deliveryCost = parseFloat(delivery) || 0;
     let taxValue = parseFloat(tax) || 0;
-    let calculatedDiscount = parseFloat(discountAmount) || 0;
+    let calculatedDiscount = 0;
 
     if (discountType === "percent") {
       calculatedDiscount = amount * (parseFloat(discount) / 100);
     } else if (discountType === "amount") {
       calculatedDiscount = parseFloat(discount) || 0;
     }
-    setDiscountAmount(calculatedDiscount);
 
     let finalPrice = (amount - calculatedDiscount) + deliveryCost + (amount * (taxValue / 100));
     const finalAmountValue = finalPrice.toFixed(2);
-    setFinalAmount(finalAmountValue);
+    const newResultContent = `${amount} - ${calculatedDiscount.toFixed(2)} + ${deliveryCost} + (${amount} * ${taxValue} / 100) = ${finalAmountValue}`;
 
-    setResultContent(`${amount} - ${calculatedDiscount.toFixed(2)} + ${deliveryCost} + (${amount} * ${taxValue} / 100) = ${finalAmountValue}`);
-
-    // todo if selectedItem is not null then call hook remove(selectedItem.id) 
+    setResultContent(newResultContent);
 
     const newHistoryItem = {
-      //id: 0, todo
+      id: selectedItem ? selectedItem.id : Date.now(),
       totalAmount,
       discount,
       discountType,
       delivery,
       tax,
       finalAmount: finalAmountValue,
-      resultContent: resultContent
+      resultContent: newResultContent
     };
 
     const savedHistory = JSON.parse(localStorage.getItem("calculationHistory")) || [];
-    // todo update submitted ids in savedHistory. add each item + 1.
-    const updatedHistory = [newHistoryItem, ...savedHistory];
-    
+    let updatedHistory;
+
+    if (selectedItem) {
+      updatedHistory = savedHistory.filter(item => item.id !== selectedItem.id); 
+      updatedHistory = [newHistoryItem, ...updatedHistory]; 
+    } else {
+      updatedHistory = [newHistoryItem, ...savedHistory];
+    }
+
     localStorage.setItem("calculationHistory", JSON.stringify(updatedHistory));
 
-
     updateHistory(updatedHistory);
+
+    setSelectedItem(null);
     setTotalAmount(0);
     setDiscount(0);
     setDiscountType("percent");
@@ -112,10 +116,15 @@ const ShareCalculator = ({ updateHistory, selectedItem }) => {
             type="number"
             placeholder="tax"
             value={tax}
-            onChange={(e) => setTax(e.target.value)} />
+            min="1"
+            max="100"
+            onChange={(e) => setTax(Math.min(100, Math.max(1, e.target.value)))} // مقدار tax باید بین 1 و 100 باشد
+          />
         </div>
       </div>
+
       <button onClick={handleCalculate}>محاسبه</button>
+
       {finalAmount !== null && (
         <p className="final-amount">
           Result: {resultContent}

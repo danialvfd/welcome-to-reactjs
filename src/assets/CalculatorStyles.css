@@ -3,7 +3,9 @@
   padding: 1.5rem;
   background-color: white;
   border-radius: 0.5rem;
-  max-width: 40rem;
+  max-width: 50rem;
+  max-height: 30rem;
+  overflow-y: auto;
   margin: 1.5rem auto;
 }
 
@@ -71,6 +73,7 @@ label {
 }
 
 .history-item {
+  position: relative;
   background-color: #ffffff;
   border: 1px solid #e0e0e0;
   border-radius: 6px;
@@ -123,11 +126,13 @@ label {
 /* Drag handle */
 .drag-handle {
   cursor: grab;
-  padding: 8px;
-  background-color: #e9ecef;
-  border-radius: 4px;
+  padding: 2px;
+  border-radius: 0.25rem;
   display: inline-block;
   margin-right: 10px;
+  position: absolute;
+  top: 0.5px;
+  right: 5px;
 }
 
 .history-item:active .drag-handle {

@@ -14,9 +14,10 @@ import PageC from './pages/PageC';
 import UseCallback from './pages/UseCallback';
 import CustomHook from './pages/TestCustomHook';
 import DongChi from './pages/DongChi';
-import UserDetails from './pages/UserDetails'; 
+import UserDetails from './pages/UserDetails';
 import './assets/myStyles.css';
 import TestDragging from './pages/TestDragging';
+import { SelectedItemProvider } from './context/SelectedItemContext'; 
 
 const App = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -24,25 +25,27 @@ const App = () => {
     return (
         <StateContext.Provider value={{ state, dispatch }}>
             <UserProvider>
-                <Router>
-                    <Layout>
-                        <Routes>
-                            <Route path="/DongChi" element={<DongChi />} />
-                            <Route path="/page1" element={<Functional />} />
-                            <Route path="/page2" element={<Class />} />
-                            <Route path="/page3" element={<TestApi />} />
-                            <Route path="/page4" element={<TestAjax />} />
-                            <Route path="/pageA" element={<PageA />} />
-                            <Route path="/pageB" element={<PageB />} />
-                            <Route path="/pageC" element={<PageC />} />
-                            <Route path="/page5" element={<UseRef />} />
-                            <Route path="/page6" element={<UseCallback />} />
-                            <Route path="/page7" element={<CustomHook />} />
-                            <Route path="/user-details" element={<UserDetails />} />
-                            <Route path="/TestDragging" element={<TestDragging />} />
-                        </Routes>
-                    </Layout>
-                </Router>
+                <SelectedItemProvider>  
+                    <Router>
+                        <Layout>
+                            <Routes>
+                                <Route path="/DongChi" element={<DongChi />} />
+                                <Route path="/page1" element={<Functional />} />
+                                <Route path="/page2" element={<Class />} />
+                                <Route path="/page3" element={<TestApi />} />
+                                <Route path="/page4" element={<TestAjax />} />
+                                <Route path="/pageA" element={<PageA />} />
+                                <Route path="/pageB" element={<PageB />} />
+                                <Route path="/pageC" element={<PageC />} />
+                                <Route path="/page5" element={<UseRef />} />
+                                <Route path="/page6" element={<UseCallback />} />
+                                <Route path="/page7" element={<CustomHook />} />
+                                <Route path="/user-details" element={<UserDetails />} />
+                                <Route path="/TestDragging" element={<TestDragging />} />
+                            </Routes>
+                        </Layout>
+                    </Router>
+                </SelectedItemProvider>
             </UserProvider>
         </StateContext.Provider>
     );
