@@ -7,16 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 
 .navbar {
-  background-color: #3d1e1e;
-  padding: 10px;
+  padding: 5px;
   text-align: center;
-  font-family: fantasy;
 }
 
 .navbar ul {
@@ -24,16 +18,14 @@ code {
   display: flex;
 }
 
-.navbar ul li {
-  margin: 0 10px;
-}
+
 
 .navbar ul li a {
   color: rgb(252, 252, 252);
 }
 
 .navbar ul li a:hover {
-  color: #0e0060;
+  color: rgba(196, 210, 0, 0.87);
 }
 
 .DongChiNavbar {
@@ -68,3 +60,34 @@ button:active {
   box-shadow: inset 0 0 9e9q #0005;
   transition: 2s;
 }
+
+.navbar {
+  border-radius: 6px;
+  background-image: linear-gradient(#565656 13%, #1e0505 40%, #020308 86%);
+  color: rgba(255, 255, 255, 0.6);
+  text-shadow: 0 -2px 0 black;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px #560000, 0 4px 12px #ffffff;
+}
+.navbar li {
+  flex-direction: row-reverse;
+  line-height: 1rem;
+  align-items: center;
+  transition: all 80ms ease;
+  display: flex;
+  padding: 8px;
+}
+.navbar li a {
+  color: inherit;
+  text-decoration: none;
+}
+.navbar li:not(:last-of-type) {
+  border-right: 1px solid #545454;
+}
+
+
+
+
+
+
+

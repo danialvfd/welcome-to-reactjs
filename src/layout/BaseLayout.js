@@ -18,6 +18,7 @@ const Layout = ({ children }) => {
           <li><Link to="/page7">CustomHook</Link></li>
           <li><Link to="/user-details">user-details</Link></li>
           <li><Link to="/TestDragging">TestDragging</Link></li>
+          <li><Link to="/TestDraggingWithSortable">TestDragging(sortable)</Link></li>
         </ul>
       </nav>
       <div className="content">

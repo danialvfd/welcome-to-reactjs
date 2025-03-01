@@ -1,27 +1,21 @@
-import React, { useState, useEffect } from 'react';
+// src/pages/DongChi.js
+
+import React from 'react';
 import Layout from '../layout/MainLayout';
 import AmountDivider from '../components/AmountDivider';
 import DiscountCalculator from '../components/DiscountCalculator';
 import ShareCalculator from '../components/ShareCalculator';
 import CalculationHistory from '../components/CalculationHistory';
-import { useSelectedItem } from '../context/SelectedItemContext'; 
+import { useSelectedItem } from '../context/SelectedItemContext';
+import UseCalculationHistory from '../hooks/useCalculationHistory';
+import { ToastContainer } from 'react-toastify';
 
 function DongChi() {
-  const [history, setHistory] = useState([]);
+  const { history, updateHistory } = UseCalculationHistory();
   const { selectedItem, setSelectedItem } = useSelectedItem();
 
-  useEffect(() => {
-    const savedHistory = JSON.parse(localStorage.getItem("calculationHistory")) || [];
-    setHistory(savedHistory);
-  }, []);
-
-  const updateHistory = (updatedHistory) => {
-    setHistory(updatedHistory);
-    localStorage.setItem("calculationHistory", JSON.stringify(updatedHistory));
-  };
-
   return (
-    <Layout 
+    <Layout   
       sidebar={
         <>
           <AmountDivider />
@@ -30,13 +24,15 @@ function DongChi() {
       } 
       content={
         <>
+        <ToastContainer />
           <ShareCalculator 
+            history={history}
             updateHistory={updateHistory}
-            selectedItem={selectedItem} 
-            setSelectedItem={setSelectedItem} 
+            selectedItem={selectedItem}
+            setSelectedItem={setSelectedItem}
           />
           <CalculationHistory 
-            history={history} 
+            history={history}
             updateHistory={updateHistory}
           />
         </>

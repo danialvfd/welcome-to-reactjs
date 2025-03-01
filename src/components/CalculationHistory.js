@@ -1,10 +1,11 @@
 import React from "react";
-import { useSelectedItem } from "../context/SelectedItemContext"; 
+import { useSelectedItem } from "../context/SelectedItemContext";
 import { DndContext } from '@dnd-kit/core';
-import { useSortable, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import SortableHistoryItem from "../components/SortableHistoryItem";
 
 const CalculationHistory = ({ history, updateHistory }) => {
-  const { setSelectedItem } = useSelectedItem(); 
+  const { setSelectedItem } = useSelectedItem();
 
   const handleDelete = (index) => {
     const updatedHistory = history.filter((_, i) => i !== index);
@@ -32,21 +33,6 @@ const CalculationHistory = ({ history, updateHistory }) => {
     }
   };
 
-  const SortableItem = ({ item, index }) => {
-    const { setNodeRef } = useSortable({ id: item.id });
-
-    return (
-      <li ref={setNodeRef} className="history-item">
-        <div className="drag-handle">⬍</div>
-        <div className="history-actions">
-          <strong>{index + 1}- {item.resultContent}</strong>
-          <button onClick={() => handleEdit(item)}>Edit</button>
-          <button onClick={() => handleDelete(index)}>Remove</button>
-        </div>
-      </li>
-    );
-  };
-
   return (
     <DndContext onDragEnd={handleDragEnd}>
       <SortableContext items={history.map(item => item.id)} strategy={verticalListSortingStrategy}>
@@ -54,7 +40,13 @@ const CalculationHistory = ({ history, updateHistory }) => {
           <h2>History</h2>
           <ul className="history-container">
             {history.map((item, index) => (
-              <SortableItem key={item.id} item={item} index={index} />
+              <SortableHistoryItem
+                key={item.id}
+                item={item}
+                index={index}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+              />
             ))}
           </ul>
         </div>

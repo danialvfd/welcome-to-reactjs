@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { useSelectedItem } from "../context/SelectedItemContext";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const ShareCalculator = ({ updateHistory, selectedItem }) => {
   const { setSelectedItem } = useSelectedItem();
@@ -19,6 +22,7 @@ const ShareCalculator = ({ updateHistory, selectedItem }) => {
       setDelivery(selectedItem.delivery);
       setTax(selectedItem.tax);
       setFinalAmount(selectedItem.finalAmount);
+      setResultContent(selectedItem.resultContent); // Added to set the result content as well
     }
   }, [selectedItem]);
 
@@ -28,20 +32,28 @@ const ShareCalculator = ({ updateHistory, selectedItem }) => {
     let taxValue = parseFloat(tax) || 0;
     let calculatedDiscount = 0;
 
-    if (discountType === "percent") {
-      calculatedDiscount = amount * (parseFloat(discount) / 100);
-    } else if (discountType === "amount") {
-      calculatedDiscount = parseFloat(discount) || 0;
+    if (discountType === 'percent') {
+      if (discount < 0 || discount > 100) {
+        toast.error('Discount percentage must be between 0 and 100');
+        setDiscount(0);
+        return;
+      }
+      calculatedDiscount = amount * (discount / 100);
+    } else if (discountType === 'amount') {
+      if (discount < 0) {
+        toast.error('Discount amount cannot be negative');
+        setDiscount(0);
+        return;
+      }
+      calculatedDiscount = discount;
     }
-
-    // todo if percent : input value < 0 or > 100 then show error message tand cancel proggress 
-    // todo if amnt: input value < 0 then show error message and cancel proggress 
 
     let finalPrice = (amount - calculatedDiscount) + deliveryCost + (amount * (taxValue / 100));
     const finalAmountValue = finalPrice.toFixed(2);
     const newResultContent = `${amount} - ${calculatedDiscount.toFixed(2)} + ${deliveryCost} + (${amount} * ${taxValue} / 100) = ${finalAmountValue}`;
 
     setResultContent(newResultContent);
+    setFinalAmount(finalAmountValue);
 
     const newHistoryItem = {
       id: selectedItem ? selectedItem.id : Date.now(),
@@ -67,11 +79,14 @@ const ShareCalculator = ({ updateHistory, selectedItem }) => {
     localStorage.setItem("calculationHistory", JSON.stringify(updatedHistory));
 
     updateHistory(updatedHistory);
+    handleReset();
+  };
 
+  const handleReset = () => {
     setSelectedItem(null);
     setTotalAmount(0);
     setDiscount(0);
-    setDiscountType("percent");
+    setDiscountType("percent"); 
     setDelivery(0);
     setTax(0);
   };
@@ -127,8 +142,9 @@ const ShareCalculator = ({ updateHistory, selectedItem }) => {
       </div>
 
       <button onClick={handleCalculate}>محاسبه</button>
+      <button onClick={handleReset}>ریست</button>
 
-      {finalAmount !== null && (
+      {finalAmount !== null && resultContent && (
         <p className="final-amount">
           Result: {resultContent}
         </p>

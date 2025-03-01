@@ -17,7 +17,10 @@ import DongChi from './pages/DongChi';
 import UserDetails from './pages/UserDetails';
 import './assets/myStyles.css';
 import TestDragging from './pages/TestDragging';
+import TestDraggingWithSortable from './pages/TestDraggingWithSortable';
 import { SelectedItemProvider } from './context/SelectedItemContext'; 
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 const App = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -42,6 +45,7 @@ const App = () => {
                                 <Route path="/page7" element={<CustomHook />} />
                                 <Route path="/user-details" element={<UserDetails />} />
                                 <Route path="/TestDragging" element={<TestDragging />} />
+                                <Route path="/TestDraggingWithSortable" element={<TestDraggingWithSortable />} />
                             </Routes>
                         </Layout>
                     </Router>

@@ -8,3 +8,5 @@ body {
 }
 
 /*# sourceMappingURL=output.css.map */
+/* todo if percent : input value < 0 or > 100 then show error message tand cancel proggress 
+ todo if amnt: input value < 0 then show error message and cancel proggress 
