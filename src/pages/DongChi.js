@@ -26,7 +26,7 @@ function DongChi() {
         <>
         <ToastContainer />
           <ShareCalculator 
-            history={history}
+            history={history} 
             updateHistory={updateHistory}
             selectedItem={selectedItem}
             setSelectedItem={setSelectedItem}

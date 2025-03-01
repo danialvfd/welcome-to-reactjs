@@ -22,7 +22,7 @@ const ShareCalculator = ({ updateHistory, selectedItem }) => {
       setDelivery(selectedItem.delivery);
       setTax(selectedItem.tax);
       setFinalAmount(selectedItem.finalAmount);
-      setResultContent(selectedItem.resultContent); // Added to set the result content as well
+      setResultContent(selectedItem.resultContent);
     }
   }, [selectedItem]);
 
