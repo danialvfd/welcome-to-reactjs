@@ -1,5 +1,3 @@
-// src/pages/DongChi.js
-
 import React from 'react';
 import Layout from '../layout/MainLayout';
 import AmountDivider from '../components/AmountDivider';

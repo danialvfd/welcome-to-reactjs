@@ -16,6 +16,8 @@ body {
 .navbar ul {
   list-style-type: none;
   display: flex;
+  color: #ffffff;
+  transition: 1s ease;
 }
 
 
