@@ -8,27 +8,6 @@ body {
 }
 
 
-.navbar {
-  padding: 5px;
-  text-align: center;
-}
-
-.navbar ul {
-  list-style-type: none;
-  display: flex;
-  color: #ffffff;
-  transition: 1s ease;
-}
-
-
-
-.navbar ul li a {
-  color: rgb(252, 252, 252);
-}
-
-.navbar ul li a:hover {
-  color: rgba(196, 210, 0, 0.87);
-}
 
 .DongChiNavbar {
   color: #ceec29 !important;
@@ -63,15 +42,32 @@ button:active {
   transition: 2s;
 }
 
+
 .navbar {
-  border-radius: 6px;
-  background-image: linear-gradient(#565656 13%, #1e0505 40%, #020308 86%);
-  color: rgba(255, 255, 255, 0.6);
-  text-shadow: 0 -2px 0 black;
-  cursor: pointer;
-  box-shadow: 2px 2px 4px #560000, 0 4px 12px #ffffff;
+  background: linear-gradient(45deg, #385f85, #065337); 
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  border-radius: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: all 0.3s ease;
+  text-shadow: 3px 3px 1px black;
+
 }
+
+.navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;  
+}
+
 .navbar li {
+  margin: 0.25rem;
+  position: relative;
+  transition: transform 0.2s ease;
   flex-direction: row-reverse;
   line-height: 1rem;
   align-items: center;
@@ -79,17 +75,34 @@ button:active {
   display: flex;
   padding: 8px;
 }
-.navbar li a {
-  color: inherit;
+
+.navbar a {
   text-decoration: none;
+  color: rgb(255, 188, 17);
+  font-size: 18px;
+  font-weight: 500;
+  position: relative;
+  border-radius: 5px;
+  transition: all 0.9s ease; 
 }
-.navbar li:not(:last-of-type) {
-  border-right: 1px solid #545454;
+
+.navbar a:hover {
+  color: #ff1414;
+  transform: scale(1.1);
 }
 
+.navbar a:hover::before {
+  transform: scale(1.1);
+}
 
+.DongChiNavbar {
+  font-weight: bold;
+  color: #f39c12; 
+}
 
-
-
+.DongChiNavbar:hover {
+  color: #fff;
+  transform: scale(1.1);
+}
 
 

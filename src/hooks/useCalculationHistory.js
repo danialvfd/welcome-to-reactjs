@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useCalculationHistory = () => {
+const UseCalculationHistory = () => {
     const [history, setHistory] = useState([]);
 
     useEffect(() => {
@@ -16,4 +16,4 @@ const useCalculationHistory = () => {
     return { history, updateHistory };
 };
 
-export default useCalculationHistory;
+export default UseCalculationHistory;

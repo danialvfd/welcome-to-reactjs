@@ -30,7 +30,7 @@ const ShareCalculator = ({ updateHistory, selectedItem }) => {
     const amount = parseFloat(totalAmount) || 0;
 
     if (amount <= 0) {
-      toast.error('Total amount باید بزرگتر از صفر باشد');
+      toast.error('Total amount must be greater than 0');
       return false;
     }
 
@@ -98,6 +98,12 @@ const ShareCalculator = ({ updateHistory, selectedItem }) => {
 
     localStorage.setItem("calculationHistory", JSON.stringify(updatedHistory));
     updateHistory(updatedHistory);
+  };
+
+  const clearHistory = () => {
+    localStorage.removeItem("calculationHistory");
+    updateHistory([]);
+    toast.success("History cleared successfully!");
   };
 
   const handleReset = (clearResult = true) => {
@@ -170,6 +176,7 @@ const ShareCalculator = ({ updateHistory, selectedItem }) => {
 
       <button onClick={handleCalculate}>محاسبه</button>
       <button onClick={() => handleReset()}>ریست</button>
+      <button onClick={clearHistory}>پاک کردن تاریخچه</button>
 
       {finalAmount !== null && resultContent && (
         <p className="final-amount">

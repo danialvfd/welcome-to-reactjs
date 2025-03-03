@@ -5,7 +5,7 @@ import DiscountCalculator from '../components/DiscountCalculator';
 import ShareCalculator from '../components/ShareCalculator';
 import CalculationHistory from '../components/CalculationHistory';
 import { useSelectedItem } from '../context/SelectedItemContext';
-import UseCalculationHistory from '../hooks/useCalculationHistory';
+import UseCalculationHistory from '../hooks/UseCalculationHistory';
 import { ToastContainer } from 'react-toastify';
 
 function DongChi() {
